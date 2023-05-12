@@ -17,18 +17,16 @@ const defaultPort = "8080"
 func main() {
 	r := chi.NewRouter()
 
-	// r.Get("/", func(w http.ResponseWriter, r *http.Request) {
-	// 	w.Write([]byte("welcome"))
-	// })
-	// http.ListenAndServe(":3000", r)
-
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = defaultPort
 	}
 
-	// srv := handler.NewDefaultServer(graph.NewResolver())
-	srv := handler.NewDefaultServer(graph.NewExecutableSchema(graph.Config{Resolvers: graph.NewResolver()}))
+	cfg := graph.Config{Resolvers: graph.NewResolver()}
+	execSchema := graph.NewExecutableSchema(cfg)
+
+	// Create a new GraphQL server with the executable schema.
+	srv := handler.NewDefaultServer(execSchema)
 
 	r.Handle("/", playground.Handler("GraphQL playground", "/query"))
 	r.Handle("/query", srv)

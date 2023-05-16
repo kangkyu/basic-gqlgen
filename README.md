@@ -38,7 +38,7 @@ There might be an error message
 validation failed: packages.Load: -: package basic-gqlgen/graph/model is not in GOROOT (/usr/local/go/src/basic-gqlgen/graph/model)
 ```
 
-`gqlgen generate` command removes `graph/model/models_gen.go` file because we do not have any generated model (I think). Add a file NOT named `graph/model/models_gen.go` and put this line
+`gqlgen generate` command removes `graph/model/models_gen.go` file because we do not have any generated model (I think). Add a file NOT named `models_gen.go` in the existing `graph/model/` directory and put this line
 ```go
 package model
 ```
